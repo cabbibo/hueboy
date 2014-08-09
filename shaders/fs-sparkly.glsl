@@ -82,7 +82,7 @@ void main(){
   vec3 a = texture2D( t_audio , vec2( abs(sin(dot( -vLightDir , fNorm )*1.)) , 0. ) ).xyz;
 
   a *= abs(vec3( sin( a.x * 1. ) , sin( a.y * 1. ), sin( a.z * 1. ) )); 
-  a *= vec3( .9 , .6 , .7 ); 
+  a *= vec3( .6 , .9 , .8 ); 
   vec3 iri = texture2D( t_iri , vec2( abs(sin(reflFR*reflFR*10.)) , 0. ) ).xyz;
 
   totalIri +=  iri * vDistMultiplier * reflFR*reflFR*reflFR*reflFR*reflFR*reflFR;
@@ -92,9 +92,13 @@ void main(){
      
     totalIri +=  iri * vDistMultiplier * fr*fr*fr*fr* fr*fr*fr*fr* fr*fr*fr*fr* fr*fr*fr*fr;
 
-   vec3 f =texture2D( t_iriFace , vec2( reflFR *  reflFR * reflFR , 0. ) ).xyz;
+   
+    vec3 f =texture2D( t_iriFace , vec2( reflFR *  reflFR * reflFR , 0. ) ).xyz;
 
   totalIri += a;
+
+   vec3 aFR = texture2D( t_audio , vec2( abs(sin( reflFR*10.)) , 0. ) ).xyz;
+
 
   //totalIri -= title.xyz;
 
@@ -106,7 +110,7 @@ void main(){
 
 
 
-  gl_FragColor = vec4( totalIri  , fOpacity );
+  gl_FragColor = vec4( totalIri * aFR  , fOpacity );
  // gl_FragColor = vec4( tLookup.x , 0. , tLookup.y , 1. );
  // gl_FragColor = title;//vec4( tLookup.x , 0. , tLookup.y , 1. );
 

@@ -5,10 +5,11 @@ var G = {};
 G.texturesToLoad = [
  
   ['gold'   , 'img/iri/gold.png'],
-  ['turq'   , 'img/iri/turq.png'],
+  ['turq'   , 'img/iri/red.png'],
 
- // ['sand'  , 'img/normals/moss_normal_map.jpg' ],
-  ['sand'  , 'img/normals/sand.png' ],
+//  ['sand'  , 'img/normals/moss_normal_map.jpg' ],
+//  ['sand'  , 'img/normals/sand.png' ],
+  ['sand'  , 'img/normals/chesterfield.png' ],
   ['text'  , 'img/tielsie.png' ],
 
 ]
@@ -25,7 +26,7 @@ G.MATS      = {};
 G.audio   = new AudioController();
 G.shaders = new ShaderLoader( 'shaders' );
 G.leap    = new Leap.Controller();
-G.gui     = new dat.GUI({});
+//G.gui     = new dat.GUI({});
 G.loader  = new Loader();
 G.stats   = new Stats();
 
@@ -85,10 +86,10 @@ G.renderer.setSize( G.w , G.h );
 G.container.appendChild( G.renderer.domElement );
   
 G.stats.domElement.id = 'stats';
-document.body.appendChild( G.stats.domElement );
+//document.body.appendChild( G.stats.domElement );
 
 G.leap.connect();
-G.gui.close();
+//G.gui.close();
 G.scene.add( G.camera );
 //G.onResize();
 
