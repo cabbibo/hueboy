@@ -1,0 +1,126 @@
+<html>
+  <title> enough </title>
+  <head>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <style>
+ #container{ position:absolute; left:0px; top:0px; z-index:0; width:100%; height:100%; display:block; overflow:hidden; cursor: none;}
+    </style>
+  </head>
+
+  <body>
+    <div id="container"></div>
+
+    <script src="lib/leap.min.js"></script>
+    <script src="lib/three.js"></script>
+    <script src="lib/jquery.min.js"></script>
+    <script src="lib/stats.min.js"></script>
+    <script src="lib/dat.gui.min.js"></script>
+    <script src="lib/underscore.js"></script>
+    <script src="lib/Tween.js"></script>
+    <script src="lib/Stream.js"></script>
+    
+    <script src="lib/ShaderLoader.js"></script>
+    <script src="lib/TrackballControls.js"></script>
+    <script src="lib/TileRenderer.js"></script>
+    <script src="lib/FileSaver.js"></script>
+
+    <script src="lib/AudioController.js"></script>
+    <script src="lib/AudioTexture.js"></script>
+    <script src="lib/LoadedAudio.js"></script>
+    <script src="lib/UserAudio.js"></script>
+    <script src="lib/Looper.js"></script>
+
+
+    <script src="lib/ObjectControls.js"></script>
+    <script src="lib/RiggedSkeleton.js"></script>
+    <script src="lib/Loader.js"></script>
+    
+    <!-- THESE ALWAYS GOES LAST -->
+    <script src="js/Global.js"></script>
+
+
+    <script>
+
+      // TODO: 
+      // Write shaders for hands
+
+     //G.audio.mute.gain.value = 0;
+
+
+      G.loader.addLoad();
+
+      // For Hands
+      G.shaders.load( 'vs-sparkly' , 'sparkly' , 'vertex'      );
+      G.shaders.load( 'fs-sparkly' , 'sparkly' , 'fragment'    );
+
+      G.shaders.shaderSetLoaded = function(){
+        G.loader.onLoad();
+      }
+
+      G.loadTextures();
+
+      G.addToStartArray( function(){
+
+        G.stream = new Stream('audio/hueboy.mp3' , G.audio );
+
+        G.stream.play();
+        var titleGeo = new THREE.PlaneGeometry( 1000 , 1000 , 100 , 100 );
+
+        var normalTexture   = G.TEXTURES.sand;
+        var iriTexture      = G.TEXTURES.turq;
+        var iriTextureFace  = G.TEXTURES.gold;
+        var textTexture     = G.TEXTURES.text;
+
+        console.log( normalTexture );
+        console.log( iriTexture );
+        console.log( iriTextureFace );
+        console.log( textTexture );
+        var uniforms = {
+
+          t_audio: G.t_audio,
+          t_normal: { type:"t" , value: normalTexture },
+          t_iri: { type:"t" , value: iriTexture },
+          t_iriFace: { type:"t" , value: iriTextureFace },
+          t_text:{ type:"t" , value: textTexture },
+          textureScale:{ type:"v2" , value: .9 },
+          normalScale:{ type:"f" , value: 2.4 },
+          texScale:{ type:"f" , value: 1.5 },
+          cameraPos:{ type:"v3" , value: G.camera.position },
+          lightPos:{ type:"v3" , value: G.iPoint },
+          lightCutoff:{ type:"f" , value: 400 },
+          lightPower:{ type:"f" , value: 1},
+          timer: G.timer,
+          bumpHeight:{ type:"f" , value: 40},
+          bumpSize:{ type:"f" , value: .003},
+          bumpSpeed:{ type:"f" , value: .1},
+          bumpCutoff:{ type:"f" , value: .4},
+          opacity:{ type:"f" , value:1.},
+
+        }
+
+        var titleMat = new THREE.ShaderMaterial({
+
+          uniforms: uniforms,
+          vertexShader: G.shaders.vs.sparkly,
+          fragmentShader: G.shaders.fs.sparkly,
+          transparent: true,
+
+        });
+       
+        var titleMesh = new THREE.Mesh( titleGeo , titleMat );
+
+        titleMesh.position.z = -600;
+
+        G.scene.add( titleMesh );
+
+
+
+      }.bind( G ) );
+
+
+
+    </script>
+
+  </body>
+</html>
