@@ -7,9 +7,10 @@ G.texturesToLoad = [
   ['gold'   , 'img/iri/gold.png'],
   ['turq'   , 'img/iri/red.png'],
 
-//  ['sand'  , 'img/normals/moss_normal_map.jpg' ],
+  //['sand'  , 'img/normals/moss_normal_map.jpg' ],
 //  ['sand'  , 'img/normals/sand.png' ],
   ['sand'  , 'img/normals/chesterfield.png' ],
+  //['sand'  , 'img/normals/carbonFiber.png' ],
   ['text'  , 'img/tielsie.png' ],
 
 ]
