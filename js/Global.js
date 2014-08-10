@@ -24,11 +24,12 @@ G.TEXTURES  = {};
 G.GEOS      = {};
 G.MATS      = {};
 
+G.loader  = new Loader();
+
 G.audio   = new AudioController();
 G.shaders = new ShaderLoader( 'shaders' );
 G.leap    = new Leap.Controller();
 //G.gui     = new dat.GUI({});
-G.loader  = new Loader();
 G.stats   = new Stats();
 
 G.tmpV3   = new THREE.Vector3();
@@ -53,6 +54,7 @@ G.loader.onStart = function(){
   }
 
 }.bind( G );
+
 
 G.w             = window.innerWidth;
 G.h             = window.innerHeight;
@@ -80,6 +82,7 @@ G.dpr     = { type:"f" , value: window.devicePixelRatio || 1 }
 
 G.paused  = false;
 
+console.log(G.renderer.context.getExtension('OES_standard_derivatives'));
 
 // Get all the fun stuff started
 
